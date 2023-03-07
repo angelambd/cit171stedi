@@ -17,7 +17,7 @@ const loggedInStates={
   LOGGING_IN:'LOGGING_IN'
 }
 
-const App = () =>{
+const App = () =>{ //arrow function
   const [isFirstLaunch, setFirstLaunch] = React.useState(true);
   const [loggedInState,setLoggedInState] = React.useState(loggedInStates.NOT_LOGGED_IN);
   const [phoneNumber,setPhoneNumber] = React.useState("");
@@ -28,7 +28,7 @@ const App = () =>{
    const getSessionToken = async()=>{
     const sessionToken = await AsyncStorage.getItem('sessionToken');
     console.log('sessionToken',sessionToken);
-    const validateResponse = await fetch('https://dev.stedi.me/validate/'+sessionToken,
+    const validateResponse = await fetch('https://dev.stedi.me/validate/'+ sessionToken,
     {
       method:'GET',
       headers:{
@@ -52,10 +52,11 @@ return(
  
 );
   }else if(loggedInState==loggedInStates.LOGGED_IN){
-    return <Navigation/>
+    return <Navigation setLoggedInState={setLoggedInState}/>
   } else if(loggedInState==loggedInStates.NOT_LOGGED_IN){
     return (
       <View>
+        <Text style={styles.title}>Welcome Back</Text>
         <TextInput 
           value={phoneNumber}
           onChangeText={setPhoneNumber}
@@ -142,7 +143,7 @@ return(
          justifyContent: 'center'
      },
      input: {
-       height: 40,
+       height: 50,
        marginTop: 100,
        borderWidth: 1,
        padding: 10,
@@ -154,5 +155,13 @@ return(
        alignItems: "center",
        backgroundColor: "#DDDDDD",
        padding: 10
-     }    
- })
+     },
+     title:{
+      textAlign:"center",
+      marginTop:80,
+      marginBottom:-50,
+      fontSize: 25,
+      color:'#A0CE4E',
+      fontWeight: 'bold'
+     }
+ });
