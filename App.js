@@ -84,6 +84,7 @@ return(
           placeholderTextColor='#613659' 
           placeholder='Cell Phone'>          
         </TextInput>
+        
         <Button
           title='Biometric Authentication'
           style={styles.button}
