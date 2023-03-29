@@ -6,7 +6,6 @@ import { Card, CardTitle, CardContent} from 'react-native-material-cards';
 import { LineChart} from 'react-native-chart-kit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 const Home = (props) => {
   const token = useRef("");
   const [score, setScore] = useState(0);
@@ -17,7 +16,7 @@ const todayScore = async() =>{
   let scoreObject ={};
   try{
 
-const sessionToken = await AsyncStorage.getItem('sessionToken');// get storage from device
+const sessionToken = await AsyncStorage.getItem('sessionToken'); // get storage from device
 console.log('sessionToken in Home',sessionToken);
 const userName = await AsyncStorage.getItem('userName');
 console.log('userName',userName);
@@ -30,8 +29,8 @@ console.log('userName',userName);
     }
   })
   console.log('token:', token.current);
-  const scoreText = await scoreResponse.text();
-  console.log('scoreText',scoreText);
+  // const scoreText = await scoreResponse.text();
+  // console.log('scoreText', scoreText);
   scoreObject = await scoreResponse.json();
   setScore(scoreObject.score);
   console.log(scoreObject.score);

@@ -205,6 +205,8 @@ console.log('Error', error)
     y: 0,
     z: 0,
   });
+
+  
   // const startTime = new Date().getTime();
   const [subscription, setSubscription] = useState(null);
   const recentAccelerationData = useRef([]);//useRef returns a mutable ref object whose .current property is initialized to the passed argument (initialValue). The returned object will persist for the full lifetime of the component.
@@ -291,6 +293,8 @@ console.log('Error', error)
     return () => _unsubscribe();
   }, []);
 
+  
+
   const { x, y, z } = data.current;
   //console.log("x: "+x+" y:"+y+" z:"+z);
   let total_amount_xyz = Math.sqrt(x * x+ y*y + z*z) * 9.81;
@@ -298,7 +302,18 @@ console.log('Error', error)
 //circula process bar
 console.log(stepCount, "stepCount");
 
-
+const counterShare = async() =>{
+  const shareOptions = {
+    message: 'https://dev.stedi.me/timer.html#' +token.current,
+  }
+  try{
+    const shareResponse = await Share.share(shareOptions)
+    console.log(shareResponse);
+    }
+    catch(error){
+console.log('Error', error)
+    }
+  }
 
 if (currentScreen === 'counter'){
 
@@ -326,6 +341,13 @@ elevation: 4}}>
       style={styles.button}
     >
       <Text>{subscription ? 'Stop' : 'GO'}</Text>
+     </TouchableOpacity>
+
+  <TouchableOpacity
+     onPress={counterShare} title="Share"
+      style={styles.spotter}
+    >
+      <Text>{subscription ? 'Share' : 'Add Spotter'}</Text>
      </TouchableOpacity>
 
      </CardContent>
@@ -415,6 +437,7 @@ subtitle={messageOutcome()}
       }
 
 
+
 }
 
 function round(n) {
@@ -433,6 +456,19 @@ const styles = StyleSheet.create({
 
   button: {
     marginTop: 15,
+    marginBottom: 20,
+    width: 170,
+    height: 38,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    borderRadius: 100,
+    backgroundColor: '#A0CE4E',
+    marginLeft:50
+  },
+
+  spotter: {
+    marginTop: -15,
     marginBottom: 20,
     width: 170,
     height: 38,
